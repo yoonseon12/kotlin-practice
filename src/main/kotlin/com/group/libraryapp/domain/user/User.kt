@@ -18,9 +18,10 @@ class User(
     val id:Long? = null,
 ) {
     init {
-        if (name.isBlank()) {
-            throw IllegalArgumentException("이름은 비어 있을 수 없습니다");
-        }
+        require(name.isNotBlank()) { "이름은 비어 있을 수 없습니다" }
+//        if (name.isBlank()) {
+//            throw IllegalArgumentException("이름은 비어 있을 수 없습니다");
+//        }
     }
 
     fun updateName(name: String) {
@@ -28,7 +29,7 @@ class User(
     }
 
     fun loanBook(book: Book) {
-        this.userLoanHistories.add(UserLoanHistory(this, book.name, false))
+        this.userLoanHistories.add(UserLoanHistory(this, book.name))
     }
 
     fun returnBook(bookName: String) {
